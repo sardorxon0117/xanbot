@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Xabarlar</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial;
+            padding: 20px;
+        }
+        
+        .message {
+            background: #333;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        
+        a {
+            color: #80cbc4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>📬 Yuborilgan xabarlar</h1>
+    {% for msg in messages %}
+    <div class="message">
+        <b>👤 {{ msg.user }}</b> <small>🕒 {{ msg.time }}</small><br> {% if msg.type == 'text' %}
+        <p>{{ msg.content }}</p>
+        {% elif msg.type == 'file' %}
+        <a href="{{ msg.content }}" target="_blank">📥 Faylni yuklash</a> {% endif %}
+    </div>
+    {% endfor %}
+</body>
+
+</html>
