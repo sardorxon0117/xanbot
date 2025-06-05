@@ -1,38 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 
 <head>
     <meta charset="UTF-8">
-    <title>Xabarlar</title>
+    <title>Xabarlar ro‘yxati</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            background-color: #1e1e1e;
-            color: white;
             font-family: Arial;
-            padding: 20px;
+            background: black;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            font-size: 30px;
+            color: #a8f9a8;
         }
         
         .message {
-            background: #333;
+            background: black;
             padding: 10px;
             margin-bottom: 10px;
-            border-radius: 5px;
+            border-radius: 12px;
+            border: solid #a8f9a8;
+            box-shadow: 2px 2px 5px #a8f9a8;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message {
+            text-decoration: none;
+            padding: 10px 20px;
+            width: 100%;
+            color: #a8f9a8;
+        }
+        
+        .time {
+            color: #a8f9a8;
+            font-size: 18px;
         }
         
         a {
-            color: #80cbc4;
+            text-decoration: none;
+            padding: 10px 20px;
+            width: 100%;
+            background-color: #a8f9a8;
+            border-radius: 10px;
+        }
+        
+        .user {
+            font-size: 18px;
+            color: #a8f9a8;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 
 <body>
-    <h1>📬 Yuborilgan xabarlar</h1>
+    <h2 class="header">✓ Saqlangan xabarlar va fayllar</h2>
     {% for msg in messages %}
     <div class="message">
-        <b>👤 {{ msg.user }}</b> <small>🕒 {{ msg.time }}</small><br> {% if msg.type == 'text' %}
-        <p>{{ msg.content }}</p>
-        {% elif msg.type == 'file' %}
-        <a href="{{ msg.content }}" target="_blank">📥 Faylni yuklash</a> {% endif %}
+        <strong class="user">{{ msg.user }}</strong> <span class="time">{{ msg.time }}</span><br> {% if msg.type == 'text' %} {{ msg.content }} {% elif msg.type in ['file', 'photo', 'audio', 'video', 'voice', 'video_note'] %}
+        <a href="{{ msg.content }}" target="_blank">Yuklab olish: {{ msg.type }}</a> {% endif %}
     </div>
     {% endfor %}
 </body>
